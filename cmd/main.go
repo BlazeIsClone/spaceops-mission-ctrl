@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/blazeisclone/order-service/domain/organization"
+	"github.com/blazeisclone/order-service/instrumenting"
 
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 
@@ -18,7 +19,9 @@ func main() {
 	}
 
 	router := http.NewServeMux()
+
 	organization.Routes(router)
+	instrumenting.Routes(router)
 
 	port := os.Getenv("PORT")
 
