@@ -13,3 +13,17 @@ Run Docker Containers:
 ```bash
 docker-compose up -d
 ```
+
+Build Image:
+
+```bash
+docker build --progress=plain --no-cache -t spaceops-mission-ctrl:latest -f deployments/local/Dockerfile .
+```
+
+K8s Local Commands:
+
+```
+minikube dashboard
+kubectl apply -f deployments/local/deployment.yml
+minikube service go-app-service --url
+```

@@ -1,15 +1,11 @@
-FROM golang:latest
-
-RUN mkdir /app
+FROM golang:1.22.1
 
 WORKDIR /app
 
-ADD ../../ /app
+ADD . .
 
-COPY ../../go.mod ../../go.sum ./
+RUN make build
 
-RUN go mod download
+EXPOSE 3000
 
-RUN go get github.com/githubnemo/CompileDaemon
-
-ENTRYPOINT CompileDaemon --build="make build" --command=./app
+CMD ["./app"]
