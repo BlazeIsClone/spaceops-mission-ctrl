@@ -4,6 +4,10 @@ WORKDIR /app
 
 ADD . .
 
+ENV PORT=3000
+
+ENV BASE_PATH="/api/v1"
+
 RUN make build
 
 EXPOSE 3000
