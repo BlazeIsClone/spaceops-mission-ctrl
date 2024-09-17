@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: go-app
-          image: blazeclone/spaceops-mission-ctrl:latest
+          image: ghcr.io/blazeisclone/spaceops-mission-ctrl:v0.0.1
           ports:
             - containerPort: 3000
           resources:
@@ -26,16 +26,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: go-app-service
-spec:
-  selector:
-    app: go-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000
-  type: LoadBalancer
