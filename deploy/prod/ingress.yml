@@ -7,8 +7,14 @@ metadata:
   labels:
     app: mission-ctrl
 spec:
-  defaultBackend:
-    service:
-      name: mission-ctrl-service
-      port:
-        number: 80
+  rules:
+    - host: "mission-ctrl.blaze64.xyz"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mission-ctrl-service
+                port:
+                  number: 80
