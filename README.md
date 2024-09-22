@@ -22,8 +22,20 @@ docker build --progress=plain --no-cache -t spaceops-mission-ctrl:latest -f depl
 
 K8s Local Commands:
 
-```
+```bash
 minikube dashboard
-kubectl apply -f deployments/local/deployment.yml
+
+kubectl apply -f deploy/local/deployment.yml
+
 minikube service go-app-service --url
+```
+
+### Deploy Production
+
+Application:
+
+```bash
+kubectl apply -f deploy/prod/deployment.yml \
+-f deploy/prod/service.yml \
+-f deploy/prod/ingress.yml
 ```
