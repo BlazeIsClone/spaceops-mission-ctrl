@@ -1,25 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloweb
+  name: mission-ctrl-deployment
   labels:
-    app: hello
+    app: mission-ctrl
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: hello
-      tier: web
+      app: mission-ctrl
   template:
     metadata:
       labels:
-        app: hello
-        tier: web
+        app: mission-ctrl
     spec:
       containers:
-        - name: hello-app
-          image: ghcr.io/blazeisclone/spaceops-mission-ctrl:v0.0.1
+        - name: mission-ctrl-app
+          image: ghcr.io/blazeisclone/spaceops-mission-ctrl:latest
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          env:
+            - name: PORT
+              value: "3000"
+            - name: BASE_PATH
+              value: /api/v1
           ports:
             - containerPort: 3000
           resources:
             requests:
-              cpu: 200m
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "150m"

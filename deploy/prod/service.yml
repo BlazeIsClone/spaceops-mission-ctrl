@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: helloweb-backend
+  name: mission-ctrl-service
   labels:
-    app: hello
+    app: mission-ctrl
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
-    app: hello
-    tier: web
+    app: mission-ctrl
   ports:
-    - port: 3000
+    - port: 80
       targetPort: 3000
