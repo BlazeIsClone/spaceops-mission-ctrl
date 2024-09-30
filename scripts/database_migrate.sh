@@ -9,4 +9,4 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-migrate -database "$DATABASE_URL" -path database/migrations "$1"
+migrate -database "$DATABASE_URL" -path internal/database/migrations "$1"
