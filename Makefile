@@ -12,3 +12,6 @@ dev-up:
 
 dev-down:
 	bash scripts/dev.sh down
+
+migrate:
+	bash scripts/database_migrate.sh $(action)

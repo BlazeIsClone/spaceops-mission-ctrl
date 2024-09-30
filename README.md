@@ -14,8 +14,8 @@ Run Docker Containers:
 docker-compose up -d
 ```
 
-Build Image:
+Running Database Migrations (use arg action):
 
 ```bash
-docker build --progress=plain --no-cache -t spaceops-mission-ctrl:latest -f deployments/local/Dockerfile .
+make migrate action=up
 ```
