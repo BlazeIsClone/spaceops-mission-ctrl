@@ -1,2 +1,3 @@
 #!/bin/bash
-go test cmd/main.go
+
+go test cmd/app/main.go

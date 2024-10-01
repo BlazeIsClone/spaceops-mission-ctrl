@@ -7,11 +7,5 @@ test:
 build:
 	bash scripts/build.sh
 
-dev-up:
-	bash scripts/dev.sh up
-
-dev-down:
-	bash scripts/dev.sh down
-
 migrate:
-	bash scripts/database_migrate.sh $(action)
+	bash scripts/migrate.sh $(action)
