@@ -1,3 +1,3 @@
 #!/bin/bash
 
-go build -o app cmd/app/main.go
+go build -o build cmd/app/main.go
