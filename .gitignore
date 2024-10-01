@@ -24,7 +24,7 @@ go.work
 .env
 
 # Built binaries
-./app
+build
 
 
 # Linters
