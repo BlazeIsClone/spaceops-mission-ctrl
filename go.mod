@@ -1,4 +1,4 @@
-module github.com/blazeisclone/order-service
+module github.com/blazeisclone/spaceops-mission-ctrl
 
 go 1.22.1
 

@@ -3,7 +3,7 @@ package organization
 import (
 	"errors"
 
-	"github.com/blazeisclone/order-service/domain"
+	"github.com/blazeisclone/spaceops-mission-ctrl/domain"
 	"github.com/google/uuid"
 )
 
