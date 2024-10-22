@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/blazeisclone/spaceops-mission-ctrl/domain/organization"
+	"github.com/blazeisclone/spaceops-mission-ctrl/domain/mission"
 	"github.com/blazeisclone/spaceops-mission-ctrl/instrumenting"
 	mysqlDB "github.com/blazeisclone/spaceops-mission-ctrl/internal/database/mysql"
 
@@ -25,9 +25,6 @@ func main() {
 
 	router := http.NewServeMux()
 
-	organization.Routes(router)
-	instrumenting.Routes(router)
-
 	port := os.Getenv("PORT")
 
 	server := http.Server{
@@ -46,6 +43,9 @@ func main() {
 		db.Close()
 		fmt.Println("db.Closed")
 	}()
+
+	instrumenting.Routes(router)
+	mission.Routes(router, db)
 
 	server.ListenAndServe()
 }
