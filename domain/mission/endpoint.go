@@ -11,9 +11,9 @@ func Routes(router *http.ServeMux, db *sql.DB) {
 
 	basePath := os.Getenv("BASE_PATH")
 
-	router.HandleFunc("POST "+basePath+"/missions", handler.Create)
-	router.HandleFunc("GET "+basePath+"/missions", handler.Read)
-	router.HandleFunc("GET "+basePath+"/missions/{id}", handler.FindByID)
-	router.HandleFunc("PUT "+basePath+"/missions/{id}", handler.UpdateByID)
-	router.HandleFunc("DELETE "+basePath+"/missions/{id}", handler.DeleteByID)
+	router.HandleFunc("GET "+basePath+"/missions", handler.Index)
+	router.HandleFunc("POST "+basePath+"/missions", handler.Store)
+	router.HandleFunc("GET "+basePath+"/missions/{id}", handler.Show)
+	router.HandleFunc("PUT "+basePath+"/missions/{id}", handler.Update)
+	router.HandleFunc("DELETE "+basePath+"/missions/{id}", handler.Destroy)
 }
