@@ -20,7 +20,23 @@ func NewHandler(db *sql.DB) *Handler {
 	}
 }
 
-func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Index(w http.ResponseWriter, r *http.Request) {
+	mission, err := h.repo.GetAll()
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Error finding mission: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	if mission == nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(mission)
+}
+
+func (h *Handler) Store(w http.ResponseWriter, r *http.Request) {
 	var payload struct {
 		Name        string `json:"name"`
 		Description string `json:"description"`
@@ -45,7 +61,7 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(mission)
 }
 
-func (h *Handler) FindByID(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Show(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -68,7 +84,7 @@ func (h *Handler) FindByID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(mission)
 }
 
-func (h *Handler) UpdateByID(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Update(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -102,7 +118,7 @@ func (h *Handler) UpdateByID(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Mission updated successfully")
 }
 
-func (h *Handler) DeleteByID(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Destroy(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
