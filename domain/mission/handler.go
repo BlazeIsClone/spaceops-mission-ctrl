@@ -45,6 +45,22 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(mission)
 }
 
+func (h *Handler) Read(w http.ResponseWriter, r *http.Request) {
+	mission, err := h.repo.Read()
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Error finding mission: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	if mission == nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(mission)
+}
+
 func (h *Handler) FindByID(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
